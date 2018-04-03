@@ -88,6 +88,17 @@ class PostageOption
     }
 
     /**
+     * Set the value of tax
+     *
+     * @return self
+     */ 
+    public function setTax(TaxRate $tax)
+    {
+        $this->tax = $tax;
+        return $this;
+    }
+
+    /**
      * Get the monitary value of tax for this option
      * 
      * @return float
@@ -109,17 +120,6 @@ class PostageOption
     public function getTotalPrice()
     {
         return $this->getPrice() + $this->getTaxPrice();
-    }
-
-    /**
-     * Set the value of tax
-     *
-     * @return self
-     */ 
-    public function setTax(TaxRate $tax)
-    {
-        $this->tax = $tax;
-        return $this;
     }
 
     /**
@@ -145,7 +145,7 @@ class PostageOption
         return base64_encode(json_encode((array)$this));
     }
 
-    public function __construct($name, $price, TaxRate $tax)
+    public function __construct($name, $price, TaxRate $tax = null)
     {
         $this->name = $name;
         $this->price = $price;

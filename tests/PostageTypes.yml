@@ -1,0 +1,106 @@
+SilverCommerce\GeoZones\Model\Region:
+  gb_glos:
+    Name: "Gloucestershire"
+    Code: "GLS"
+    CountryCode: "GB"
+  de_berlin:
+    Name: "Berlin"
+    Code: "BE"
+    CountryCode: "DE"
+  us_arizona:
+    Name: "Arizona"
+    Code: "AZ"
+    CountryCode: "US"
+SilverCommerce\GeoZones\Model\Zone:
+  uk:
+    Name: "UK"
+    Country: "GB"
+    AllRegions: true
+    Enabled: true
+  de:
+    Name: "Germany"
+    Country: "DE"
+    AllRegions: true
+    Enabled: true
+  us:
+    Name: "US"
+    Country: "US"
+    AllRegions: true
+    Enabled: true
+SilverCommerce\Postage\Model\FlatRate:
+  uk:
+    Name: "UK"
+    Enabled: true
+    Price: 5.00
+    Locations: =>SilverCommerce\GeoZones\Model\Zone.uk
+  global:
+    Name: "Global"
+    Enabled: true
+    Price: 9.00
+SilverCommerce\Postage\Model\SinglePostageRate:
+  weightone:
+    Min: 0
+    Max: 2
+    Price: 1
+  weighttwo:
+    Min: 3
+    Max: 5
+    Price: 2
+  weightglobal:
+    Min: 0
+    Max: 2
+    Price: 10
+  quantityone:
+    Min: 0
+    Max: 2
+    Price: 3
+  quantitytwo:
+    Min: 3
+    Max: 10
+    Price: 4
+  quantityglobal:
+    Min: 0
+    Max: 6
+    Price: 10
+  priceone:
+    Min: 0
+    Max: 5
+    Price: 5
+  pricetwo:
+    Min: 6
+    Max: 10
+    Price: 6
+  priceglobal:
+    Min: 0
+    Max: 10
+    Price: 10
+SilverCommerce\Postage\Model\WeightBased:
+  uk:
+    Name: "UK"
+    Enabled: true
+    Locations: =>SilverCommerce\GeoZones\Model\Zone.uk
+    Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.weightone,=>SilverCommerce\Postage\Model\SinglePostageRate.weighttwo
+  global:
+    Name: "Global"
+    Enabled: true
+    Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.weightglobal
+SilverCommerce\Postage\Model\PriceBased:
+  uk:
+    Name: "UK"
+    Enabled: true
+    Locations: =>SilverCommerce\GeoZones\Model\Zone.uk
+    Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.priceone,=>SilverCommerce\Postage\Model\SinglePostageRate.pricetwo
+  global:
+    Name: "Global"
+    Enabled: true
+    Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.priceglobal
+SilverCommerce\Postage\Model\QuantityBased:
+  uk:
+    Name: "UK"
+    Enabled: true
+    Locations: =>SilverCommerce\GeoZones\Model\Zone.uk
+    Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.quantityone,=>SilverCommerce\Postage\Model\SinglePostageRate.quantitytwo
+  global:
+    Name: "Global"
+    Enabled: true
+    Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.quantityglobal

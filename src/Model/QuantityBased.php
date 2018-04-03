@@ -71,10 +71,10 @@ class QuantityBased extends PostageType
         $locations = $this->Locations();
         $country = $parcel->getCountry();
         $region = $parcel->getRegion();
-        $quantity = (float)$parcel->getItems();
+        $value = (float)$parcel->getItems();
         $check = false;
         
-        // Should this 
+        // Should this type filter based on location
         if (!$locations->exists()) {
             $check = true;
         } elseif (isset($country) && isset($region)) {
@@ -90,8 +90,8 @@ class QuantityBased extends PostageType
 
         if ($check) {
             $rates = $this->Rates()->filter([
-                "Min:LessThanOrEqual" => $quantity,
-                "Max:GreaterThanOrEqual" => $quantity
+                "Min:LessThanOrEqual" => $value,
+                "Max:GreaterThanOrEqual" => $value
             ]);
 
             foreach ($rates as $rate) {

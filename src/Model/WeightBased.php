@@ -71,27 +71,35 @@ class WeightBased extends PostageType
         $locations = $this->Locations();
         $country = $parcel->getCountry();
         $region = $parcel->getRegion();
-        $weight = (float)$parcel->getWeight();
-
-        if (isset($country) && isset($region)) {
+        $value = (float)$parcel->getItems();
+        $check = false;
+        
+        // Should this type filter based on location
+        if (!$locations->exists()) {
+            $check = true;
+        } elseif (isset($country) && isset($region)) {
             $locations = $locations->filter([
                 "Regions.CountryCode" => $country,
                 "Regions.Code" => $region
             ]);
 
             if ($locations->exists()) {
-                $rates = $this->Rates()->filter([
-                    "Min:LessThanOrEqual" => $weight,
-                    "Max:GreaterThanOrEqual" => $weight
-                ]);
+                $check = true;
+            }
+        }
 
-                foreach ($rates as $rate) {
-                    $return->add(PostageOption::create(
-                        $this->Name,
-                        $rate->Price,
-                        $this->Tax()->Rates()->first()
-                    ));
-                }
+        if ($check) {
+            $rates = $this->Rates()->filter([
+                "Min:LessThanOrEqual" => $value,
+                "Max:GreaterThanOrEqual" => $value
+            ]);
+
+            foreach ($rates as $rate) {
+                $return->add(PostageOption::create(
+                    $this->Name,
+                    $rate->Price,
+                    $this->Tax()->Rates()->first()
+                ));
             }
         }
 

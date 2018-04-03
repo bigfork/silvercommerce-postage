@@ -1,0 +1,10 @@
+SilverCommerce\TaxAdmin\Model\TaxRate:
+  vat:
+    Title: "VAT"
+    Rate: 20
+SilverCommerce\Postage\Tests\Model\ExtendableObject:
+  test:
+    Title: "A test object"
+    PostageTitle: "Old Postage"
+    PostagePrice: 1.00
+    PostageTaxID: null

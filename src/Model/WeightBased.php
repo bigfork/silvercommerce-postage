@@ -73,6 +73,11 @@ class WeightBased extends PostageType
         $region = $parcel->getRegion();
         $value = (float)$parcel->getItems();
         $check = false;
+        $tax = null;
+
+        if ($this->Tax()->exists()) {
+            $tax = $this->Tax()->ValidTax();
+        }
         
         // Should this type filter based on location
         if (!$locations->exists()) {
@@ -98,7 +103,7 @@ class WeightBased extends PostageType
                 $return->add(PostageOption::create(
                     $this->Name,
                     $rate->Price,
-                    $this->Tax()->Rates()->first()
+                    $tax
                 ));
             }
         }

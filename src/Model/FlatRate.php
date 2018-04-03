@@ -40,10 +40,16 @@ class FlatRate extends PostageType
         $locations = $this->Locations();
         $country = $parcel->getCountry();
         $region = $parcel->getRegion();
+        $tax = null;
+
+        if ($this->Tax()->exists()) {
+            $tax = $this->Tax()->ValidTax();
+        }
+        
         $postage = PostageOption::create(
             $this->Name,
             $this->Price,
-            $this->Tax()->Rates()->first()
+            $tax
         ); 
 
         if (!$locations->exists()) {

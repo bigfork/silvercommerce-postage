@@ -5,6 +5,3 @@ Name: postageconfig
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - SilverCommerce\Postage\Extensions\SiteConfigExtension
-SilverCommerce\OrdersAdmin\Model\Estimate:
-  extensions:
-    - SilverCommerce\Postage\Extensions\PostageExtension

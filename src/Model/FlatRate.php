@@ -11,7 +11,7 @@ use SilverCommerce\Postage\Helpers\PostageOption;
 
 /**
  * Represents a flat shipping cost, based on the selected regions.
- * 
+ *
  * NOTE If you dont select any regions, this rate will be applied to
  * ALL regions
  */
@@ -30,7 +30,7 @@ class FlatRate extends PostageType
     /**
      * If the current parcel is located in an area that we
      * allow flat rate
-     * 
+     *
      * @param Parcel
      * @return SSList
      */
@@ -50,7 +50,7 @@ class FlatRate extends PostageType
             $this->Name,
             $this->Price,
             $tax
-        ); 
+        );
 
         if (!$locations->exists()) {
             $return->add($postage);

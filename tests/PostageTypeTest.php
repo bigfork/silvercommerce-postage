@@ -21,19 +21,19 @@ class PostageTypeTest extends SapphireTest
 
     const POSTAGE_GLOBAL_NAME = "Global";
 
-	/**
-	 * Add scaffold postage types
-	 *
-	 * @var string
-	 * @config
-	 */
+    /**
+     * Add scaffold postage types
+     *
+     * @var string
+     * @config
+     */
     protected static $fixture_file = 'PostageTypes.yml';
 
-	public function setUp()
+    public function setUp()
     {
-		parent::setUp();
+        parent::setUp();
         Config::inst()->set(Region::class, "create_on_build", false);
-	}
+    }
 
     /**
      * Test possible postage results for flat rate shipping
@@ -139,5 +139,4 @@ class PostageTypeTest extends SapphireTest
         $this->assertEquals(self::POSTAGE_GLOBAL_NAME, $global_results->first()->getName());
         $this->assertEquals(10, $global_results->first()->getPrice());
     }
-
 }

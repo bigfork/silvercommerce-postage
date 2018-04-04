@@ -61,7 +61,7 @@ class PriceBased extends PostageType
     /**
      * If the current parcel is located in an area that we
      * allow and has an acceptable weight
-     * 
+     *
      * @param Parcel
      * @return SSList
      */
@@ -110,5 +110,4 @@ class PriceBased extends PostageType
 
         return $return;
     }
-
 }

@@ -9,9 +9,9 @@ use SilverStripe\ORM\FieldType\DBCurrency;
 /**
  * Generic container for postage data, PossiblePostage objects need to be
  * created by PostageTypes and then returned as part of the ArrayList
- * 
+ *
  * This object contains 3 generic params:
- * 
+ *
  *  - name (the name of the postage)
  *  - price (the cost of this object)
  *  - tax (the TaxCategory assigned to this object)
@@ -27,7 +27,7 @@ class PostageOption
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -37,7 +37,7 @@ class PostageOption
      * Set the value of name
      *
      * @return  self
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -46,14 +46,14 @@ class PostageOption
 
     /**
      * The price of this current shipping option
-     * 
+     *
      * @var int
      */
     protected $price = 0;
 
     /**
      * Get the value of price
-     */ 
+     */
     public function getPrice()
     {
         return $this->price;
@@ -63,7 +63,7 @@ class PostageOption
      * Set the value of price
      *
      * @return  self
-     */ 
+     */
     public function setPrice($price)
     {
         $this->price = $price;
@@ -74,14 +74,14 @@ class PostageOption
     /**
      * Assign tax to this item, this should be an instance of
      * TaxCategory
-     * 
+     *
      * @var TaxRate
      */
     protected $tax = null;
 
     /**
      * Get the value of tax
-     */ 
+     */
     public function getTax()
     {
         return $this->tax;
@@ -91,7 +91,7 @@ class PostageOption
      * Set the value of tax
      *
      * @return self
-     */ 
+     */
     public function setTax(TaxRate $tax)
     {
         $this->tax = $tax;
@@ -100,7 +100,7 @@ class PostageOption
 
     /**
      * Get the monitary value of tax for this option
-     * 
+     *
      * @return float
      */
     public function getTaxPrice()
@@ -114,7 +114,7 @@ class PostageOption
 
     /**
      * Get the total monitary value of this option
-     * 
+     *
      * @return float
      */
     public function getTotalPrice()
@@ -124,7 +124,7 @@ class PostageOption
 
     /**
      * Generate a summary of this postage option
-     * 
+     *
      * @var string
      */
     public function getSummary()
@@ -137,7 +137,7 @@ class PostageOption
 
     /**
      * Generate a unique key for this parcel
-     * 
+     *
      * @return string
      */
     public function getKey()

@@ -9,11 +9,11 @@ use SilverCommerce\TaxAdmin\Model\TaxCategory;
 
 /**
  * Postage Types are a base class for creating differnt types of postage.
- * 
+ *
  * Custom postage types need to provide their own implementation of `getPossiblePostage`.
  * This is the method that will be called when trying to determine a list of
  * possible postage options for the current order.
- * 
+ *
  */
 class PostageType extends DataObject
 {
@@ -42,11 +42,11 @@ class PostageType extends DataObject
     /**
      * Return a list of possible postage options that can be rendered into the postage
      * form.
-     * 
+     *
      * NOTE Even if you have one option, you need to return a list, containing one item.
-     * 
+     *
      * The list can be any implementation of an SSList
-     * 
+     *
      * @param Parcel
      * @return SSList
      */
@@ -54,5 +54,4 @@ class PostageType extends DataObject
     {
         user_error("You must implement your own 'getPossiblePostage' method");
     }
-
 }

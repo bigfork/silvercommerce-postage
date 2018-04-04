@@ -12,13 +12,13 @@ use SilverCommerce\Postage\Helpers\PostageOption;
 /**
  * Add extra postage options to a DataObject (for example and Invoice or
  * Estimate)
- * 
+ *
  * This function will attempt to autocalculate tax for an extended object,
  * and will add look for the following extension hooks to update the prices:
- * 
+ *
  *  - `updateTaxTotal` (to add the postage tax to the current tax value)
  *  - `updateTotal` (to add the current postage price to the total value)
- * 
+ *
  */
 class PostageExtension extends DataExtension
 {
@@ -40,7 +40,7 @@ class PostageExtension extends DataExtension
     /**
      * Set the postage settings on this object based on the provided
      * PostageOption.
-     * 
+     *
      * @return self
      */
     public function setPostage(PostageOption $postage)
@@ -54,7 +54,7 @@ class PostageExtension extends DataExtension
 
     /**
      * Generate a PostageOption based on this object's details
-     * 
+     *
      * @return PostageOption
      */
     public function getPostage()
@@ -68,7 +68,7 @@ class PostageExtension extends DataExtension
 
     /**
      * Remove all postage settings from this object
-     * 
+     *
      * @return self
      */
     public function clearPostage()
@@ -85,12 +85,12 @@ class PostageExtension extends DataExtension
      */
     public function getPostageDetails()
     {
-        return $this->owner->PostageTitle . " (" . $this->owner->obj("PostageTotal")->Nice() . ")"; 
+        return $this->owner->PostageTitle . " (" . $this->owner->obj("PostageTotal")->Nice() . ")";
     }
 
     /**
      * Get the total value of postage (including tax)
-     * 
+     *
      * @return float
      */
     public function getPostageTotal()
@@ -102,7 +102,7 @@ class PostageExtension extends DataExtension
 
     /**
      * Get the total value of postage (including tax)
-     * 
+     *
      * @return float
      */
     public function getPostageTaxPrice()
@@ -125,7 +125,7 @@ class PostageExtension extends DataExtension
 
     /**
      * Attempt to add the postage price to current totals
-     * 
+     *
      */
     public function updateTotal(&$total)
     {

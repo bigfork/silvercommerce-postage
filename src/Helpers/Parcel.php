@@ -10,9 +10,9 @@ use SilverStripe\Core\Injector\Injectable;
 /**
  * A parcel is a generic object that can be handed to the postage calculator
  * to find the best applicable shipping rate.
- * 
+ *
  * NOTE Thanks to SilverShop for this idea!
- * 
+ *
  */
 class Parcel
 {
@@ -20,7 +20,7 @@ class Parcel
 
     /**
      * Total width of the package
-     * 
+     *
      * @var int
      */
     protected $width  = 0;
@@ -38,7 +38,7 @@ class Parcel
 
     /**
      * Total height of the package
-     * 
+     *
      * @var int
      */
     protected $height = 0;
@@ -56,7 +56,7 @@ class Parcel
 
     /**
      * Total depth of the package
-     * 
+     *
      * @var int
      */
     protected $depth = 0;
@@ -74,7 +74,7 @@ class Parcel
 
     /**
      * Total weight of the package
-     * 
+     *
      * @var int
      */
     protected $weight = 0;
@@ -92,7 +92,7 @@ class Parcel
 
     /**
      * Total number of items in the package
-     * 
+     *
      * @var int
      */
     protected $items = 0;
@@ -110,14 +110,14 @@ class Parcel
 
     /**
      * The total monitary value of this parcel
-     * 
+     *
      * @var float
      */
     protected $value = 0;
 
     /**
      * Get the value of value
-     */ 
+     */
     public function getValue()
     {
         return $this->value;
@@ -127,7 +127,7 @@ class Parcel
      * Set the value of value
      *
      * @return  self
-     */ 
+     */
     public function setValue($value)
     {
         $this->value = $value;
@@ -137,9 +137,9 @@ class Parcel
 
     /**
      * The country this parcel is to be delivered to
-     * 
+     *
      * Expects the ISO-3166 2 character country code
-     * 
+     *
      * @var string
      */
     protected $country = null;
@@ -157,9 +157,9 @@ class Parcel
 
     /**
      * The region witin a country this parcel is to be delivered to
-     * 
+     *
      * Expects the ISO-3166-2 3 character "subdivision" code
-     * 
+     *
      * @var string
      */
     protected $region = null;
@@ -177,7 +177,7 @@ class Parcel
 
     /**
      * Optional full address that this parcel needs to be delivered to
-     * 
+     *
      * @var string
      */
     protected $address = null;
@@ -196,7 +196,7 @@ class Parcel
     /**
      * Optional latitude of the address that this parcel needs to be delivered
      * to (useful for things like distance based shipping using geo-location)
-     * 
+     *
      * @var string
      */
     protected $latitude = null;
@@ -215,7 +215,7 @@ class Parcel
     /**
      * Optional longditude of the address that this parcel needs to be delivered
      * to (useful for things like distance based shipping using geo-location)
-     * 
+     *
      * @var string
      */
     protected $longditude = null;
@@ -233,7 +233,7 @@ class Parcel
 
     /**
      * Calculate total volume
-     * 
+     *
      * @var int
      */
     public function getVolume()
@@ -243,7 +243,7 @@ class Parcel
 
     /**
      * Initialise this Package
-     * 
+     *
      * @param $country Set the country for this Parcel
      * @param $region Set the region for this parcel
      */

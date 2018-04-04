@@ -2,7 +2,9 @@
 
 namespace SilverCommerce\Postage\Tests;
 
+use SilverStripe\i18n\i18n;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Security\Security;
 use SilverCommerce\TaxAdmin\Model\TaxRate;
 use SilverCommerce\Postage\Helpers\PostageOption;
 use SilverCommerce\Postage\Tests\Model\ExtendableObject;
@@ -19,6 +21,16 @@ class PostageExtensionTest extends SapphireTest
     protected static $extra_dataobjects = [
         ExtendableObject::class
     ];
+
+    public function setUp()
+    {
+        parent::setUp();
+        
+        // Setup default locale
+        i18n::set_locale("en_GB");
+        $member = Security::getCurrentUser();
+        $member->Locale = "en_GB";
+    }
     
     protected function createPostageOption()
     {

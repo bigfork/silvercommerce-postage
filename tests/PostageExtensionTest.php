@@ -8,6 +8,8 @@ use SilverStripe\Security\Security;
 use SilverCommerce\TaxAdmin\Model\TaxRate;
 use SilverCommerce\Postage\Helpers\PostageOption;
 use SilverCommerce\Postage\Tests\Model\ExtendableObject;
+use SilverStripe\ORM\FieldType\DBCurrency;
+use SilverStripe\Core\Config\Config;
 
 /**
  * Test functionality of postage extension
@@ -30,8 +32,11 @@ class PostageExtensionTest extends SapphireTest
         i18n::set_locale("en_GB");
         $member = Security::getCurrentUser();
         $member->Locale = "en_GB";
+
+        // Set default currency
+        Config::inst()->set(DBCurrency::class, "currency_symbol", "£");
     }
-    
+
     protected function createPostageOption()
     {
         $tax = $this->objFromFixture(TaxRate::class, "vat");

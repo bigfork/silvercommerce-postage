@@ -247,11 +247,13 @@ class PostageForm extends Form
                 "PostageKey",
                 _t('SilverCommerce\Postage.SelectPostage', "Select Postage"),
                 $postage_array
-            ));
+            )->setForm($this));
 
             $actions
                 ->dataFieldByName("action_doSetPostage")
                 ->setTitle(_t('SilverCommerce\Postage.Update', "Update"));
+
+            $validator->addRequiredField("PostageKey");
         } elseif (isset($available_postage)) {
             $fields->add(ReadonlyField::create(
                 "NoPostage",
@@ -430,8 +432,8 @@ class PostageForm extends Form
 
         $this->extend("afterSetPostage", $data);
         
-        if (array_key_exists("BackURL", $data)) {
-            $url = $data["BackURL"];
+        if (array_key_exists("CompleteURL", $data)) {
+            $url = $data["CompleteURL"];
         } else {
             $url = Controller::join_links(
                 $this->getController()->Link(),

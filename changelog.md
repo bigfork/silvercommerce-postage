@@ -9,3 +9,7 @@ Initial stable release
 ## 1.0.1
 
 Remove setting postage extension on estimate by default
+
+## 1.1.0
+
+Add `PostageForm` for scaffolding postage queries

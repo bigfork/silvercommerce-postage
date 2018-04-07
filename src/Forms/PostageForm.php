@@ -146,10 +146,11 @@ class PostageForm extends Form
             throw new ValidationException("Your object must extend " . PostageExtension::class);
         }
 
-        $session = $controller
-            ->getRequest()
-            ->getSession();
+        // Initial setup
+        $this->setController($controller);
+        $this->setName($name);
 
+        $session = $this->getSession();
         $available_postage = null;
         $curr_postage = $object->getPostage();
         $add_dropdowns = false;
@@ -158,23 +159,6 @@ class PostageForm extends Form
         $this->weight = $weight;
         $this->items = $items;
         $this->object = $object;
-
-        // Setup form
-        parent::__construct(
-            $controller,
-            $name,
-            FieldList::create(
-                HiddenField::create("ClassName", null, $object->ClassName),
-                HiddenField::create("ID", null, $object->ID)
-            ),
-            FieldList::create(
-                FormAction::create(
-                    "doSetPostage",
-                    _t('SilverCommerce\Postage.Search', "Search")
-                )->addExtraClass('btn btn-secondary')
-            ),
-            RequiredFields::create([])
-        );
 
         if (empty($country) && empty($region)) {
             $add_dropdowns = true;
@@ -206,9 +190,14 @@ class PostageForm extends Form
             $available_postage = $this->getPossiblePostage();
         }
 
-        $fields = $this->Fields();
-        $actions = $this->Actions();
-        $validator = $this->getValidator();
+        $fields = FieldList::create();
+        $actions = FieldList::create(
+            FormAction::create(
+                "doSetPostage",
+                _t('SilverCommerce\Postage.Search', "Search")
+            )->addExtraClass('btn btn-secondary')
+        );
+        $validator = RequiredFields::create();
 
         // If we have not pre-selected country and region, add
         // Validator dropdowns
@@ -253,7 +242,9 @@ class PostageForm extends Form
                 ->dataFieldByName("action_doSetPostage")
                 ->setTitle(_t('SilverCommerce\Postage.Update', "Update"));
 
-            $validator->addRequiredField("PostageKey");
+            if (!$add_dropdowns) {
+                $validator->addRequiredField("PostageKey");
+            }
         } elseif (isset($available_postage)) {
             $fields->add(ReadonlyField::create(
                 "NoPostage",
@@ -269,6 +260,15 @@ class PostageForm extends Form
                 $actions->removeByName("action_doSetPostage");
             }
         }
+
+        // Setup form
+        parent::__construct(
+            $controller,
+            $name,
+            $fields,
+            $actions,
+            $validator
+        );
 
         // Check if the form has been re-posted and load data
         $data = $session->get("Form.{$this->FormName()}.data");
@@ -346,10 +346,7 @@ class PostageForm extends Form
     {
         $this->extend("beforeSetPostage", $data);
 
-        $session = $this
-            ->getController()
-            ->getRequest()
-            ->getSession();
+        $session = $this->getSession();
 
         if (array_key_exists("Country", $data)) {
             $this->country = $data["Country"];
@@ -375,24 +372,6 @@ class PostageForm extends Form
                 ->redirectBack();
         }
 
-        // Get the object this postager is for
-        if (array_key_exists("ClassName", $data)  && array_key_exists("ID", $data)) {
-            $object = DataObject::get_by_id($data["ClassName"], $data["ID"]);
-
-            if (!$this->isValidObject($object)) {
-                $this->sessionMessage(_t(
-                    "SilverCommerce\Postage.InvalidObject",
-                    "Invalid object supplied"
-                ));
-    
-                return $this
-                    ->getController()
-                    ->redirectBack();
-            }
-
-            $this->object = $object;
-        }
-
         $session->set("Form.{$this->FormName()}.Country", $this->country);
         $session->set("Form.{$this->FormName()}.Region", $this->region);
 
@@ -402,6 +381,10 @@ class PostageForm extends Form
         // If no postage areas are available and we want to redirect back,
         // do so now.
         if (!$areas->exists() && $this->getBackOnNoOptions()) {
+            $session->set("Form.{$this->FormName()}.data", $data);
+            $this->object->clearPostage();
+            $this->object->write();
+
             return $this->getController()->redirectBack();
         }
 
@@ -440,7 +423,7 @@ class PostageForm extends Form
                 "#{$this->FormName()}"
             );
         }
-        
+
         return $this
             ->getController()
             ->redirect($url);

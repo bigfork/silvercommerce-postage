@@ -1,0 +1,49 @@
+SilverStripe\SiteConfig\SiteConfig:
+  default:
+    Title: "Test"
+SilverCommerce\TaxAdmin\Model\TaxRate:
+  vat:
+    Title: "VAT"
+    Rate: 20
+SilverCommerce\Postage\Tests\Model\ExtendableObject:
+  uk:
+    Title: "UK Object"
+    SubTotal: 5.00
+    TotalWeight: 2
+    TotalItems: 1
+    DeliveryCountry: "GB"
+    DeliveryCounty: "GLS"
+  us:
+    Title: "US Object"
+    SubTotal: 100
+    TotalWeight: 20
+    TotalItems: 50
+    DeliveryCountry: "US"
+    DeliveryCounty: "AZ"
+SilverCommerce\GeoZones\Model\Region:
+  gb_glos:
+    Name: "Gloucestershire"
+    Code: "GLS"
+    CountryCode: "GB"
+SilverCommerce\GeoZones\Model\Zone:
+  uk:
+    Name: "UK"
+    Country: "GB"
+    AllRegions: true
+    Enabled: true
+SilverCommerce\Postage\Model\SinglePostageRate:
+  weightone:
+    Min: 0
+    Max: 2
+    Price: 1
+  weighttwo:
+    Min: 3
+    Max: 5
+    Price: 2
+SilverCommerce\Postage\Model\WeightBased:
+  uk:
+    Name: "UK"
+    Enabled: true
+    Site: =>SilverStripe\SiteConfig\SiteConfig.default
+    Locations: =>SilverCommerce\GeoZones\Model\Zone.uk
+    Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.weightone,=>SilverCommerce\Postage\Model\SinglePostageRate.weighttwo

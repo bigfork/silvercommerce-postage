@@ -9,7 +9,12 @@ use SilverCommerce\Postage\Extensions\PostageExtension;
 class ExtendableObject extends DataObject implements TestOnly
 {
     private static $db = [
-        "Title" => "Varchar"
+        "Title" => "Varchar",
+        "SubTotal" => "Currency",
+        "TotalWeight" => "Float",
+        "TotalItems" => "Int",
+        "DeliveryCountry" => "Varchar(2)",
+        "DeliveryCounty" => "Varchar(3)"
     ];
 
     private static $extensions = [

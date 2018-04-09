@@ -40,39 +40,39 @@ SilverCommerce\Postage\Model\FlatRate:
 SilverCommerce\Postage\Model\SinglePostageRate:
   weightone:
     Min: 0
-    Max: 2
+    Max: 0.99
     Price: 1
   weighttwo:
-    Min: 3
-    Max: 5
+    Min: 1
+    Max: 2
     Price: 2
   weightglobal:
     Min: 0
     Max: 2
     Price: 10
   quantityone:
-    Min: 0
-    Max: 2
+    Min: 2
+    Max: 5
     Price: 3
   quantitytwo:
-    Min: 3
+    Min: 6
     Max: 10
     Price: 4
   quantityglobal:
     Min: 0
-    Max: 6
+    Max: 10
     Price: 10
   priceone:
-    Min: 0
-    Max: 5
+    Min: 10
+    Max: 19.99
     Price: 5
   pricetwo:
-    Min: 6
-    Max: 10
+    Min: 20
+    Max: 50
     Price: 6
   priceglobal:
     Min: 0
-    Max: 10
+    Max: 50
     Price: 10
 SilverCommerce\Postage\Model\WeightBased:
   uk:

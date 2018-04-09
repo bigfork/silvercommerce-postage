@@ -13,3 +13,7 @@ Remove setting postage extension on estimate by default
 ## 1.1.0
 
 Add `PostageForm` for scaffolding postage queries
+
+## 1.1.1
+
+Fix error with weights/value

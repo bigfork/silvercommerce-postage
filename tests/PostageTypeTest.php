@@ -65,7 +65,7 @@ class PostageTypeTest extends SapphireTest
     public function testWeightBased()
     {
         $uk_parcel = Parcel::create("GB", "GLS")
-            ->setWeight(1);
+            ->setWeight(0.5);
 
         $de_parcel = Parcel::create("DE", "BE")
             ->setWeight(1);
@@ -92,10 +92,10 @@ class PostageTypeTest extends SapphireTest
     public function testPriceBased()
     {
         $uk_parcel = Parcel::create("GB", "GLS")
-            ->setValue(8);
+            ->setValue(15);
 
         $de_parcel = Parcel::create("DE", "BE")
-            ->setValue(8);
+            ->setValue(20);
 
         $uk_rate = $this->objFromFixture(PriceBased::class, 'uk');
         $global_rate = $this->objFromFixture(PriceBased::class, 'global');
@@ -119,7 +119,7 @@ class PostageTypeTest extends SapphireTest
     public function testQuantityBased()
     {
         $uk_parcel = Parcel::create("GB", "GLS")
-            ->setItems(3);
+            ->setItems(7);
 
         $de_parcel = Parcel::create("DE", "BE")
             ->setItems(3);

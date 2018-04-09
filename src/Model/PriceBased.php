@@ -71,7 +71,7 @@ class PriceBased extends PostageType
         $locations = $this->Locations();
         $country = $parcel->getCountry();
         $region = $parcel->getRegion();
-        $value = (float)$parcel->getItems();
+        $value = (float)$parcel->getValue();
         $check = false;
         $tax = null;
 

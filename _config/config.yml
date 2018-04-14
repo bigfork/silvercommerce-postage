@@ -5,3 +5,6 @@ Name: postageconfig
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - SilverCommerce\Postage\Extensions\SiteConfigExtension
+SilverCommerce\GeoZones\Model\Zone:
+  extensions:
+    - SilverCommerce\Postage\Extensions\ZoneExtension

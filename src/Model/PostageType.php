@@ -3,6 +3,7 @@
 namespace SilverCommerce\Postage\Model;
 
 use SilverStripe\ORM\DataObject;
+use SilverCommerce\GeoZones\Model\Zone;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverCommerce\Postage\Helpers\Parcel;
 use SilverCommerce\TaxAdmin\Model\TaxCategory;
@@ -29,6 +30,10 @@ class PostageType extends DataObject
         "Site" => SiteConfig::class
     ];
 
+    private static $many_many = [
+        "Locations" => Zone::class
+    ];
+
     private static $summary_fields = [
         "Name",
         "Enabled"
@@ -53,5 +58,18 @@ class PostageType extends DataObject
     public function getPossiblePostage(Parcel $parcel)
     {
         user_error("You must implement your own 'getPossiblePostage' method");
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function requireDefaultRecords()
+    {
+        parent::requireDefaultRecords();
+
+        if (PostageUpgradeTask::config()->run_during_dev_build) {
+            $task = new PostageUpgradeTask();
+            $task->up();
+        }
     }
 }

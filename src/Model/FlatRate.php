@@ -4,7 +4,6 @@ namespace SilverCommerce\Postage\Model;
 
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
-use SilverCommerce\GeoZones\Model\Zone;
 use SilverCommerce\Postage\Helpers\Parcel;
 use SilverCommerce\Postage\Model\PostageType;
 use SilverCommerce\Postage\Helpers\PostageOption;
@@ -21,10 +20,6 @@ class FlatRate extends PostageType
 
     private static $db = [
         "Price" => "Currency"
-    ];
-
-    private static $many_many = [
-        "Locations" => Zone::class
     ];
 
     /**

@@ -4,7 +4,6 @@ namespace SilverCommerce\Postage\Model;
 
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
-use SilverCommerce\GeoZones\Model\Zone;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverCommerce\Postage\Helpers\Parcel;
 use SilverCommerce\TaxAdmin\Model\TaxCategory;
@@ -29,10 +28,6 @@ class PriceBased extends PostageType
 
     private static $has_many = [
         "Rates" => SinglePostageRate::class
-    ];
-
-    private static $many_many = [
-        "Locations" => Zone::class
     ];
 
     public function getCMSFields()

@@ -33,6 +33,7 @@ class FlatRate extends PostageType
     {
         $return = ArrayList::create();
         $locations = $this->Locations();
+        $exclude = $this->Exclusions();
         $country = $parcel->getCountry();
         $region = $parcel->getRegion();
         $tax = null;
@@ -40,22 +41,35 @@ class FlatRate extends PostageType
         if ($this->Tax()->exists()) {
             $tax = $this->Tax()->ValidTax();
         }
-        
+
         $postage = PostageOption::create(
             $this->Name,
             $this->Price,
             $tax
         );
 
-        if (!$locations->exists()) {
-            $return->add($postage);
-        } elseif (isset($country) && isset($region)) {
-            $locations = $locations->filter([
-                "Regions.CountryCode" => $country,
-                "Regions.Code" => $region
-            ]);
+        if ($exclude->exists()) {
+            $exclude = $exclude->filter(
+                [
+                    "Regions.CountryCode" => $country,
+                    "Regions.Code" => $region
+                ]
+            );
+        }
 
+        if (!$exclude->exists()) {
             if ($locations->exists()) {
+                $locations = $locations->filter(
+                    [
+                        "Regions.CountryCode" => $country,
+                        "Regions.Code" => $region
+                    ]
+                );
+
+                if ($locations->exists()) {
+                    $return->add($postage);
+                }
+            } else {
                 $return->add($postage);
             }
         }

@@ -11,6 +11,7 @@ use SilverCommerce\Postage\Model\PostageType;
 class ZoneExtension extends DataExtension
 {
     private static $belongs_many_many = [
-        'Postage' => PostageType::class
+        'Postage' => PostageType::class . ".Locations",
+        'ExcludedPostage' => PostageType::class . ".Exclusions"
     ];
 }

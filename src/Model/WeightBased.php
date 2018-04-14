@@ -64,6 +64,7 @@ class WeightBased extends PostageType
     {
         $return = ArrayList::create();
         $locations = $this->Locations();
+        $exclude = $this->Exclusions();
         $country = $parcel->getCountry();
         $region = $parcel->getRegion();
         $value = (float)$parcel->getWeight();
@@ -74,16 +75,28 @@ class WeightBased extends PostageType
             $tax = $this->Tax()->ValidTax();
         }
 
-        // Should this type filter based on location
-        if (!$locations->exists()) {
-            $check = true;
-        } elseif (isset($country) && isset($region)) {
-            $locations = $locations->filter([
-                "Regions.CountryCode" => $country,
-                "Regions.Code" => $region
-            ]);
+        if ($exclude->exists()) {
+            $exclude = $exclude->filter(
+                [
+                    "Regions.CountryCode" => $country,
+                    "Regions.Code" => $region
+                ]
+            );
+        }
 
+        if (!$exclude->exists()) {
             if ($locations->exists()) {
+                $locations = $locations->filter(
+                    [
+                        "Regions.CountryCode" => $country,
+                        "Regions.Code" => $region
+                    ]
+                );
+
+                if ($locations->exists()) {
+                    $check = true;
+                }
+            } else {
                 $check = true;
             }
         }

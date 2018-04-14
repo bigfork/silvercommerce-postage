@@ -32,7 +32,8 @@ class PostageType extends DataObject
     ];
 
     private static $many_many = [
-        "Locations" => Zone::class
+        "Locations" => Zone::class,
+        "Exclusions" => Zone::class
     ];
 
     private static $summary_fields = [

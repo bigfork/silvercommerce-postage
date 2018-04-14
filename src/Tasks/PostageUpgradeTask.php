@@ -1,6 +1,6 @@
 <?php
 
-namespace SilverCommerce\Postage\Extensions;
+namespace SilverCommerce\Postage\Tasks;
 
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\DataObject;

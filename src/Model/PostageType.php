@@ -7,6 +7,7 @@ use SilverCommerce\GeoZones\Model\Zone;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverCommerce\Postage\Helpers\Parcel;
 use SilverCommerce\TaxAdmin\Model\TaxCategory;
+use SilverCommerce\Postage\Tasks\PostageUpgradeTask;
 
 /**
  * Postage Types are a base class for creating differnt types of postage.

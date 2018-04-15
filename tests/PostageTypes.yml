@@ -37,6 +37,7 @@ SilverCommerce\Postage\Model\FlatRate:
     Name: "Global"
     Enabled: true
     Price: 9.00
+    Exclusions: =>SilverCommerce\GeoZones\Model\Zone.uk
 SilverCommerce\Postage\Model\SinglePostageRate:
   weightone:
     Min: 0
@@ -84,6 +85,7 @@ SilverCommerce\Postage\Model\WeightBased:
     Name: "Global"
     Enabled: true
     Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.weightglobal
+    Exclusions: =>SilverCommerce\GeoZones\Model\Zone.uk
 SilverCommerce\Postage\Model\PriceBased:
   uk:
     Name: "UK"
@@ -94,6 +96,7 @@ SilverCommerce\Postage\Model\PriceBased:
     Name: "Global"
     Enabled: true
     Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.priceglobal
+    Exclusions: =>SilverCommerce\GeoZones\Model\Zone.uk
 SilverCommerce\Postage\Model\QuantityBased:
   uk:
     Name: "UK"
@@ -104,3 +107,4 @@ SilverCommerce\Postage\Model\QuantityBased:
     Name: "Global"
     Enabled: true
     Rates: =>SilverCommerce\Postage\Model\SinglePostageRate.quantityglobal
+    Exclusions: =>SilverCommerce\GeoZones\Model\Zone.uk

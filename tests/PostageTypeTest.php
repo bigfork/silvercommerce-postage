@@ -42,13 +42,15 @@ class PostageTypeTest extends SapphireTest
     {
         $uk_parcel = Parcel::create("GB", "GLS");
         $de_parcel = Parcel::create("DE", "BE");
+        $us_parcel = Parcel::create("US", "AK");
 
         $uk_rate = $this->objFromFixture(FlatRate::class, 'uk');
         $global_rate = $this->objFromFixture(FlatRate::class, 'global');
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);
-        $global_results = $global_rate->getPossiblePostage($uk_parcel);
+        $global_results = $global_rate->getPossiblePostage($us_parcel);
+        $excluded_results = $global_rate->getPossiblePostage($uk_parcel);
 
         $this->assertEquals(1, $uk_results->count());
         $this->assertEquals(self::POSTAGE_UK_NAME, $uk_results->first()->getName());
@@ -57,6 +59,7 @@ class PostageTypeTest extends SapphireTest
         $this->assertEquals(1, $global_results->count());
         $this->assertEquals(self::POSTAGE_GLOBAL_NAME, $global_results->first()->getName());
         $this->assertEquals(9.0, $global_results->first()->getPrice());
+        $this->assertEquals(0, $excluded_results->count());
     }
 
     /**
@@ -70,12 +73,16 @@ class PostageTypeTest extends SapphireTest
         $de_parcel = Parcel::create("DE", "BE")
             ->setWeight(1);
 
+        $us_parcel = Parcel::create("US", "AK")
+            ->setWeight(0.5);
+
         $uk_rate = $this->objFromFixture(WeightBased::class, 'uk');
         $global_rate = $this->objFromFixture(WeightBased::class, 'global');
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);
-        $global_results = $global_rate->getPossiblePostage($uk_parcel);
+        $global_results = $global_rate->getPossiblePostage($us_parcel);
+        $excluded_results = $global_rate->getPossiblePostage($uk_parcel);
 
         $this->assertEquals(1, $uk_results->count());
         $this->assertEquals(self::POSTAGE_UK_NAME, $uk_results->first()->getName());
@@ -84,6 +91,7 @@ class PostageTypeTest extends SapphireTest
         $this->assertEquals(1, $global_results->count());
         $this->assertEquals(self::POSTAGE_GLOBAL_NAME, $global_results->first()->getName());
         $this->assertEquals(10, $global_results->first()->getPrice());
+        $this->assertEquals(0, $excluded_results->count());
     }
 
     /**
@@ -96,13 +104,17 @@ class PostageTypeTest extends SapphireTest
 
         $de_parcel = Parcel::create("DE", "BE")
             ->setValue(20);
+        
+        $us_parcel = Parcel::create("US", "AK")
+            ->setValue(15);
 
         $uk_rate = $this->objFromFixture(PriceBased::class, 'uk');
         $global_rate = $this->objFromFixture(PriceBased::class, 'global');
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);
-        $global_results = $global_rate->getPossiblePostage($uk_parcel);
+        $global_results = $global_rate->getPossiblePostage($us_parcel);
+        $excluded_results = $global_rate->getPossiblePostage($uk_parcel);
 
         $this->assertEquals(1, $uk_results->count());
         $this->assertEquals(self::POSTAGE_UK_NAME, $uk_results->first()->getName());
@@ -111,6 +123,7 @@ class PostageTypeTest extends SapphireTest
         $this->assertEquals(1, $global_results->count());
         $this->assertEquals(self::POSTAGE_GLOBAL_NAME, $global_results->first()->getName());
         $this->assertEquals(10, $global_results->first()->getPrice());
+        $this->assertEquals(0, $excluded_results->count());
     }
 
     /**
@@ -123,13 +136,17 @@ class PostageTypeTest extends SapphireTest
 
         $de_parcel = Parcel::create("DE", "BE")
             ->setItems(3);
+        
+        $us_parcel = Parcel::create("US", "AK")
+            ->setItems(7);
 
         $uk_rate = $this->objFromFixture(QuantityBased::class, 'uk');
         $global_rate = $this->objFromFixture(QuantityBased::class, 'global');
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);
-        $global_results = $global_rate->getPossiblePostage($uk_parcel);
+        $global_results = $global_rate->getPossiblePostage($us_parcel);
+        $excluded_results = $global_rate->getPossiblePostage($uk_parcel);
 
         $this->assertEquals(1, $uk_results->count());
         $this->assertEquals(self::POSTAGE_UK_NAME, $uk_results->first()->getName());
@@ -138,5 +155,6 @@ class PostageTypeTest extends SapphireTest
         $this->assertEquals(1, $global_results->count());
         $this->assertEquals(self::POSTAGE_GLOBAL_NAME, $global_results->first()->getName());
         $this->assertEquals(10, $global_results->first()->getPrice());
+        $this->assertEquals(0, $excluded_results->count());
     }
 }

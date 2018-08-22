@@ -22,3 +22,7 @@ Fix error with weights/value
 
 * Move locations to `PostageType` instead of individual postage types.
 * Add ability to "exclude" zones from a postage type (for example, all zones except the UK).
+
+## 1.2.1
+
+* fixed gridfield in siteconfig

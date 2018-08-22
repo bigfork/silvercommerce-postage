@@ -27,7 +27,7 @@ class SiteConfigExtension extends DataExtension
         $postage_config = GridFieldConfig_RelationEditor::create();
         $postage_config
             ->removeComponentsByType(GridFieldAddNewButton::class)
-            ->addComponent(new GridFieldAddNewMultiClass());
+            ->addComponent(new GridFieldAddNewMultiClass("buttons-before-left"));
 
         $fields->addFieldsToTab(
             "Root.Shop",
@@ -36,6 +36,7 @@ class SiteConfigExtension extends DataExtension
                     'PostageSettings',
                     _t("SilverCommerce\Postage.PostageSettings", "Postage Settings"),
                     [
+                        LiteralField::create("DiscountPadding", "<br/>"),
                         GridField::create(
                             'PostageTypes',
                             '',

@@ -26,3 +26,7 @@ Fix error with weights/value
 ## 1.2.1
 
 * fixed gridfield in siteconfig
+
+## 1.2.2 
+
+* added getter and seeter for PostageForm::$object

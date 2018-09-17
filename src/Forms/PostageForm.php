@@ -428,4 +428,28 @@ class PostageForm extends Form
             ->getController()
             ->redirect($url);
     }
+
+    /**
+     * Get the current object to apply postage to
+     *
+     * @return  DataObject
+     */ 
+    public function getObject()
+    {
+        return $this->object;
+    }
+
+    /**
+     * Set the current object to apply postage to
+     *
+     * @param  DataObject  $object  The current object to apply postage to
+     *
+     * @return  self
+     */ 
+    public function setObject(DataObject $object)
+    {
+        $this->object = $object;
+
+        return $this;
+    }
 }

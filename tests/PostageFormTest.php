@@ -127,7 +127,7 @@ class PostageFormTest extends FunctionalTest
         $object = $this->objFromFixture(ExtendableObject::class, "uk");
         $id = $object->ID;
         $page = $this->get('postagetest/index/' . $id);
-        $postage_key = "eyJcdTAwMDAqXHUwMDAwbmFtZSI6bnVsbCwiXHUwMDAwKlx1MDAwMHByaWNlIjoiMC4wMCIsIlx1MDAwMCpcdTAwMDB0YXgiOnsiZGVzdHJveWVkIjpmYWxzZX19";
+        $postage_key = $object->getPostage()->getKey();
 
         // Page should load..
         $this->assertEquals(200, $page->getStatusCode());

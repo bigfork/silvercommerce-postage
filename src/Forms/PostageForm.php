@@ -433,7 +433,7 @@ class PostageForm extends Form
      * Get the current object to apply postage to
      *
      * @return  DataObject
-     */ 
+     */
     public function getObject()
     {
         return $this->object;
@@ -445,7 +445,7 @@ class PostageForm extends Form
      * @param  DataObject  $object  The current object to apply postage to
      *
      * @return  self
-     */ 
+     */
     public function setObject(DataObject $object)
     {
         $this->object = $object;

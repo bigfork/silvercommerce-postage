@@ -2,12 +2,14 @@
 
 namespace SilverCommerce\Postage\Model;
 
+use ReflectionClass;
 use SilverStripe\ORM\DataObject;
 use SilverCommerce\GeoZones\Model\Zone;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverCommerce\Postage\Helpers\Parcel;
 use SilverCommerce\TaxAdmin\Model\TaxCategory;
 use SilverCommerce\Postage\Tasks\PostageUpgradeTask;
+use SilverStripe\Forms\FormField;
 
 /**
  * Postage Types are a base class for creating differnt types of postage.
@@ -36,14 +38,34 @@ class PostageType extends DataObject
         "Exclusions" => Zone::class
     ];
 
+    private static $casting = [
+        'ShortClassName' => 'Varchar'
+    ];
+
     private static $summary_fields = [
-        "Name",
-        "Enabled"
+        'ShortClassName',
+        'Name',
+        'Enabled'
+    ];
+
+    private static $field_labels = [
+        'ShortClassName' => 'Type'
     ];
 
     public function getTitle()
     {
         return $this->Name;
+    }
+
+    /**
+     * Get an unqualified verson of this object's classname
+     *
+     * @return string
+     */
+    public function getShortClassName()
+    {
+        $reflect = new ReflectionClass($this);
+        return FormField::name_to_label($reflect->getShortName());
     }
 
     /**

@@ -30,3 +30,7 @@ Fix error with weights/value
 ## 1.2.2 
 
 * added getter and seeter for PostageForm::$object
+
+## 1.2.3
+
+* Add summary of the setup postage types

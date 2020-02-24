@@ -51,7 +51,7 @@ class PostageTypeTest extends SapphireTest
 
         $uk_rate = $this->objFromFixture(FlatRate::class, 'uk');
         $global_rate = $this->objFromFixture(FlatRate::class, 'global');
-        $this->assertEquals('Flat rate', $uk_rate->getShortClassName());
+        $this->assertEquals('flat rate', strtolower($uk_rate->getShortClassName()));
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);
@@ -84,7 +84,7 @@ class PostageTypeTest extends SapphireTest
 
         $uk_rate = $this->objFromFixture(WeightBased::class, 'uk');
         $global_rate = $this->objFromFixture(WeightBased::class, 'global');
-        $this->assertEquals('Weight based', $uk_rate->getShortClassName());
+        $this->assertEquals('weight based', strtolower($uk_rate->getShortClassName()));
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);
@@ -117,7 +117,7 @@ class PostageTypeTest extends SapphireTest
 
         $uk_rate = $this->objFromFixture(PriceBased::class, 'uk');
         $global_rate = $this->objFromFixture(PriceBased::class, 'global');
-        $this->assertEquals('Price based', $uk_rate->getShortClassName());
+        $this->assertEquals('price based', strtolower($uk_rate->getShortClassName()));
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);
@@ -150,7 +150,7 @@ class PostageTypeTest extends SapphireTest
 
         $uk_rate = $this->objFromFixture(QuantityBased::class, 'uk');
         $global_rate = $this->objFromFixture(QuantityBased::class, 'global');
-        $this->assertEquals('Quantity based', $uk_rate->getShortClassName());
+        $this->assertEquals('quantity based', strtolower($uk_rate->getShortClassName()));
 
         $uk_results = $uk_rate->getPossiblePostage($uk_parcel);
         $de_results = $uk_rate->getPossiblePostage($de_parcel);

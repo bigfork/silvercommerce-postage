@@ -5,6 +5,7 @@ namespace SilverCommerce\Postage\Helpers;
 use SilverCommerce\TaxAdmin\Model\TaxRate;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\ORM\FieldType\DBCurrency;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Generic container for postage data, PossiblePostage objects need to be
@@ -129,8 +130,15 @@ class PostageOption
      */
     public function getSummary()
     {
+        $config = SiteConfig::current_site_config();
+        $show_tax = $config->ShowPriceAndTax;
         $area_currency = new DBCurrency("Cost");
-        $area_currency->setValue($this->getTotalPrice());
+
+        if ($show_tax) {
+            $area_currency->setValue($this->getTotalPrice());
+        } else {
+            $area_currency->setValue($this->getPrice());
+        }
 
         return $this->getName() . " (" . $area_currency->Nice() . ")";
     }

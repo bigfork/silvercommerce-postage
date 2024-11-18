@@ -95,7 +95,7 @@ class PostageForm extends Form
      * @param boolean $back_on_no_options
      * @return self
      */
-    public function setBackOnNoOptions(boolean $back_on_no_options)
+    public function setBackOnNoOptions(bool $back_on_no_options)
     {
         $this->back_on_no_options = $back_on_no_options;
 
@@ -276,7 +276,7 @@ class PostageForm extends Form
         if (!is_array($data)) {
             $data = [];
         }
-        
+
         // Set postage key from session
         if ($curr_postage instanceof PostageOption) {
             $data["PostageKey"] = $curr_postage->getKey();
@@ -315,7 +315,7 @@ class PostageForm extends Form
             ->setValue($this->value)
             ->setWeight($this->weight)
             ->setItems($this->items);
-        
+
         return $parcel;
     }
 
@@ -397,7 +397,7 @@ class PostageForm extends Form
                 }
             }
         }
-        
+
         // If current postage is not set and areas are available, then default
         // to using the first area
         if (!$postage && $areas->exists()) {
@@ -414,7 +414,7 @@ class PostageForm extends Form
         $session->set("Form.{$this->FormName()}.data", $data);
 
         $this->extend("afterSetPostage", $data);
-        
+
         if (array_key_exists("CompleteURL", $data)) {
             $url = $data["CompleteURL"];
         } else {

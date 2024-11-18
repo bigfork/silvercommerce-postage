@@ -140,7 +140,7 @@ class PostageForm extends Form
      *
      * @throws ValidationException
      */
-    public function __construct(RequestHandler $controller = null, $name = self::DEFAULT_NAME, $object, $value = 0, $weight = 0, $items = 0, $country = null, $region = null)
+    public function __construct(RequestHandler $controller = null, $name, $object, $value = 0, $weight = 0, $items = 0, $country = null, $region = null)
     {
         if (!$this->isValidObject($object)) {
             throw new ValidationException("Your object must extend " . PostageExtension::class);

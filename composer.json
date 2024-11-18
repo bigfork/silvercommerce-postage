@@ -19,18 +19,28 @@
         "issues": "https://github.com/silvercommerce/postage/issues"
     },
     "require": {
-        "silverstripe/framework": "^4.0",
-        "silverstripe/siteconfig": "^4.0",
-        "silverstripe/admin": "^1.0",
-        "symbiote/silverstripe-gridfieldextensions": "^3.0",
-        "silvercommerce/tax-admin": "^1.0",
-        "silvercommerce/geozones": "^1.0",
-        "silvercommerce/settings": "^1.0"
+        "silverstripe/framework": "^5",
+        "silverstripe/siteconfig": "^5",
+        "silverstripe/admin": "^2",
+        "symbiote/silverstripe-gridfieldextensions": "^4",
+        "silvercommerce/tax-admin": "dev-ss5",
+        "silvercommerce/geozones": "dev-ss5",
+        "silvercommerce/settings": "dev-ss5"
     },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7",
-        "squizlabs/php_codesniffer": "^3.0"
-    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/bigfork/silvercommerce-tax-admin"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/bigfork/silvercommerce-geozones"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/bigfork/silvercommerce-settings"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "SilverCommerce\\Postage\\": "src/",
